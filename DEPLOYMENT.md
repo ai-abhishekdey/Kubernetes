@@ -1,6 +1,6 @@
 # Deployment
 
-* Create deployment yaml file and apply
+* Create deployment yaml file : [hp-app-deployment.yaml](hp-app-deployment.yaml) and apply
 
 ```
 kubectl apply -f hp-app-deployment.yaml
@@ -10,6 +10,12 @@ kubectl apply -f hp-app-deployment.yaml
 ```
 kubectl get pods
 ```
+
+<p align="left">
+<img src="images/3.png" width="1080" height="480">
+</p>
+
+
 * Expose streamlit (port 8501)
 ```
 kubectl expose deployment hp-app \
@@ -36,11 +42,48 @@ kubectl port-forward service/hp-app-streamlit 8501:8501
 
 ```
 
+<p align="left">
+<img src="images/5.png" width="1080" height="480">
+</p>
+
+
 * Check log live
 
 ```
 kubectl logs -f deployment/hp-app
 ```
+
+<p align="left">
+<img src="images/4.png" width="1080" height="480">
+</p>
+
+## Kubernetes auto-recovery
+
+* To see how kubernetes heals and recreates a replica, delete a pod
+
+```
+ kubectl delete pod hp-app-5cdb975976-n2rrw
+```
+* Check the healing process
+
+```
+kubectl get pods -w
+```
+
+<p align="left">
+<img src="images/9.png" width="1080" height="480">
+</p>
+
+* The above image shows **Kubernetes self-healing in action**
+* First of all one Pod is intentionally killed that belonged to a Deployment with replicas = 2.
+* Kubernetes sends **SIGTERM**. Gives the container time to shut down gracefully
+* Kubernetes notices:
+```
+replicas desired = 2
+replicas running = 1
+
+```
+* So it creates a brand new Pod with a new name
 
 * To scale replicas
 

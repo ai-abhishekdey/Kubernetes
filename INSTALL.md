@@ -47,3 +47,11 @@ sudo mv kind /usr/local/bin/kind
 ```
 kind version
 ```
+
+## References:
+
+1. https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux
+
+2. https://www.youtube.com/watch?v=7FK_4quGX7M
+
+3. https://www.youtube.com/watch?v=AJEaIQV-tts

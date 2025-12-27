@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hp-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app:  hp-app
+  template:
+    metadata:
+      labels:
+        app:  hp-app
+    spec:
+      containers:
+        - name:  hp-app-container
+          image: docker.io/abhishekdey001/housing-price-app:latest
+          ports:
+            - containerPort: 8501   # Streamlit
+            - containerPort: 8000   # FastAPI
+
